@@ -1,6 +1,6 @@
+import file_util
 import re
 
-import file_util
 
 DIGITS: list[str] = [
     "zero", "one", "two", "three", "four",
@@ -18,7 +18,7 @@ def part_one(file_name: str) -> int:
     return sum([get_number(line) for line in lines])
 
 
-def part_two(file_name: str):
+def part_two(file_name: str) -> int:
     def get_number(line: str) -> int:
         regex = f"(?=(\\d|{'|'.join(DIGITS)}))"
         found = re.findall(regex, line)
