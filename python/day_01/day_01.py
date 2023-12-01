@@ -2,11 +2,10 @@ import file_util
 import re
 
 
-DIGITS: list[str] = [
+TEXT_DIGITS: list[str] = [
     "zero", "one", "two", "three", "four",
     "five", "six", "seven", "eight", "nine"
 ]
-DIGIT_VALUES: dict[str, str] = {v: str(i) for i, v in enumerate(DIGITS)}
 
 
 def part_one(file_name: str) -> int:
@@ -20,11 +19,11 @@ def part_one(file_name: str) -> int:
 
 def part_two(file_name: str) -> int:
     def get_number(line: str) -> int:
-        regex = f"(?=(\\d|{'|'.join(DIGITS)}))"
+        regex = f"(?=(\\d|{'|'.join(TEXT_DIGITS)}))"
         found = re.findall(regex, line)
         first_and_last = found[0] + found[-1]
-        for key in DIGIT_VALUES.keys():
-            first_and_last = first_and_last.replace(key, DIGIT_VALUES[key])
+        for i, str_rep in enumerate(TEXT_DIGITS):
+            first_and_last = first_and_last.replace(str_rep, str(i))
         return int(first_and_last)
 
     lines = file_util.get_all_lines(file_name)
