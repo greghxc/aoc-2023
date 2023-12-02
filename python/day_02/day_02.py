@@ -18,7 +18,7 @@ def part_one(file_name: str) -> int:
     return sum(valid_games)
 
 
-def part_two(file_name: str):
+def part_two(file_name: str) -> int:
     def product_of_line(line: str) -> int:
         counts = {}
         for found in re.findall("(\\d+ [a-z]+)", line):
