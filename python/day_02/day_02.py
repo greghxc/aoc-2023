@@ -28,6 +28,7 @@ def part_two(file_name: str) -> int:
 
     lines = file_util.get_all_lines(file_name)
     products = [product_of_line(line) for line in lines]
+
     return sum(products)
 
 
