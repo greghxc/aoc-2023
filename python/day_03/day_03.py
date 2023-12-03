@@ -23,19 +23,20 @@ def part_one(file_name: str) -> int:
     lines = file_util.get_all_lines(file_name)
     lines = pad_input(lines)
 
-    not_symbols = {str(i) for i in set([*range(0, 10)] + ['.'])}
+    digits_and_dots = {str(i) for i in set([*range(0, 10)] + ['.'])}
     parts = []
     for line_number, line in enumerate(lines):
-        is_symbol_adjacent = False
+        gear_coords = set()
         accumulated_number = ""
         for char_number, char in enumerate(line):
             if char.isdigit():
                 accumulated_number += char
-                results = {lines[result[0]][result[1]] for result in adjacent_chars(line_number, char_number)}
-                if len(results.intersection(not_symbols)) != len(results):
-                    is_symbol_adjacent = True
+                adj_coords = adjacent_chars(line_number, char_number)
+                for coord in adj_coords:
+                    if lines[coord[0]][coord[1]] not in digits_and_dots:
+                        gear_coords.add(coord)
             else:
-                if accumulated_number and is_symbol_adjacent:
+                if accumulated_number and len(gear_coords):
                     parts += [accumulated_number]
                 accumulated_number = ""
                 is_symbol_adjacent = False
