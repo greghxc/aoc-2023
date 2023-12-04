@@ -25,9 +25,8 @@ def part_two(file_name: str):
     card_counts = [1 for _line in lines]
     for i, line in enumerate(lines):
         match_count = process_card(line)
-        if match_count:
-            for i_to_update in range(i + 1, i + 1 + match_count):
-                card_counts[i_to_update] += 1 * card_counts[i]
+        for i_to_update in range(i + 1, i + 1 + match_count):
+            card_counts[i_to_update] += 1 * card_counts[i]
     return sum(card_counts)
 
 
